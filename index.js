@@ -1,27 +1,19 @@
-const puppeteer = require('puppeteer');
-const jsdom = require('jsdom');
-require('dotenv').config();
+const express = require('express');
+const pageOne = require('./puppe/pageOne');
+const prueba = require('./puppe/prueba');
+const bodyparser = require('body-parser');
+const app = express()
 
-(async () => {
-    const url = process.env.IFIY;
-    try {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        const response = await page.goto(url);
-        //await page.screenshot({path: './public/screenshot.png'});
-        const body = await response.text();
+/*app.use(express.json());
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.json());*/
+const port = 3000
 
-        const { window: { document } } = new jsdom.JSDOM(body);
+app.get('/', async (req, res) => {
+    let dataPageOne = await pageOne();
+    let users = prueba();
+    res.json({ dataPageOne, users })
+})
 
-        document.querySelectorAll('.browse-movie-bottom a')
-            .forEach(element => {
-                let name = element.textContent;
-                let url = element.href;
-                console.log(name, ' - ', url);
-            });
 
-        await browser.close();
-    } catch (error) {
-        console.error(error);
-    }
-})();
+app.listen(port, () => console.log(`app listening on port ${port}`))
