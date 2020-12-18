@@ -9,7 +9,7 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());*/
 const port = 3000
 
-app.get('/', async (req, res) => {
+app.get('/api/pageOne', async (req, res) => {
     let dataPageOne = await pageOne();
     let users = prueba();
     res.json({ dataPageOne, users })

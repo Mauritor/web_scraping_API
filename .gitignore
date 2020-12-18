@@ -1,4 +1,4 @@
 node_modules
 .env
-pageOne
-pageTwo
+public/pageOne
+public/pageTwo
