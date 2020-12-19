@@ -1,19 +1,22 @@
 const express = require('express');
-const pageOne = require('./puppe/pageOne');
-const prueba = require('./puppe/prueba');
 const bodyparser = require('body-parser');
-const app = express()
 
-/*app.use(express.json());
-app.use(bodyparser.urlencoded({extended: false}));
-app.use(bodyparser.json());*/
-const port = 3000
+//INIT EXPRESS
+const app = express();
 
-app.get('/api/pageOne', async (req, res) => {
-    let dataPageOne = await pageOne();
-    let users = prueba();
-    res.json({ dataPageOne, users })
-})
+//app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
+
+//IMPORT ROUTES
+const pageMain = require('./routes/main_route')
+const pageOne = require('./routes/pageOne_route');
+
+//ROUTES MIDDLEWARES
+app.use('/', pageMain);
+app.use('/api/pageOne', pageOne);
 
 
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`app listening on port ${port}`))
