@@ -11,6 +11,11 @@ router.get('/', (req, res) => {
     href="http://192.168.0.16:3000/api/pageOne">
     PageOne
     </a>
+    <a 
+    style="color: grey; margin-top: 2Rem; display: flex; justify-content: center " 
+    href="http://192.168.0.16:3000/api/pageTwo">
+    PageTwo
+    </a>
     
     `)
 })
