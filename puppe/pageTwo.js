@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const jsdom = require('jsdom');
 require('dotenv').config();
 
-const url = process.env.BRAR
+const url = process.env.PAG
 const pageTwo = async () => {
     try {
         const browser = await puppeteer.launch();
@@ -12,12 +12,25 @@ const pageTwo = async () => {
 
         const body = await response.text();
         const { window: { document } } = new jsdom.JSDOM(body);
-        document.querySelectorAll('.lista-rounded img')
-            .forEach(element => {
-                let link = element.attributes.src.value;
-                console.log(link);
+        let news = [];
+        let urls = [];
+        document.querySelectorAll('.article-title a')
+            .forEach((element, index) => {
+                if (index < 5) {
+                    let link = element.href;
+                    //console.log(link);
+                    urls.push(link)
+                }
             });
-
+            document.querySelectorAll('div.element.title')
+            .forEach((element, index) => {
+                if (index < 5) {
+                    let title = element.textContent;
+                    //console.log(title);
+                    news.push(title)
+                }
+            });
+        return { urls, news }
         await browser.close();
     } catch (error) {
         console.error(error);

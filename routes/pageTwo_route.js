@@ -2,8 +2,9 @@ const router = require('express').Router();
 const pageTwo = require('../puppe/pageTwo')
 
 router.get('/', async (req, res) => {
-    await pageTwo() 
-    res.send('<h1>PageTwo</h1>')
+    let dataPageTwo = await pageTwo()
+    //res.send(`<h1>Page Two</h1> <p>${dataPageTwo}</p>`)
+    res.json( dataPageTwo )
     console.log('ok');
 })
 
