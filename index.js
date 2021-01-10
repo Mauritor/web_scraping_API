@@ -13,12 +13,14 @@ const pageMain = require('./routes/main_route')
 const pageOne = require('./routes/pageOne_route');
 const pageTwo = require('./routes/pageTwo_route')
 const pdf = require('./routes/pdf_route');
+const image = require('./routes/image_route');
 
 //ROUTES
 app.use('/', pageMain);
 app.use('/api/pageOne', pageOne);
 app.use('/api/pageTwo', pageTwo);
-app.use('/pdf', pdf)
+app.use('/pdf', pdf);
+app.use('/image', image);
 
 
 //INIT SERVER
