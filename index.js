@@ -4,7 +4,7 @@ const bodyparser = require('body-parser');
 //INIT EXPRESS
 const app = express();
 
-//app.use(express.json());
+//MIDDLEWARES
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
@@ -12,11 +12,15 @@ app.use(bodyparser.json());
 const pageMain = require('./routes/main_route')
 const pageOne = require('./routes/pageOne_route');
 const pageTwo = require('./routes/pageTwo_route')
+const pdf = require('./routes/pdf_route');
 
-//ROUTES MIDDLEWARES
+//ROUTES
 app.use('/', pageMain);
 app.use('/api/pageOne', pageOne);
 app.use('/api/pageTwo', pageTwo);
+app.use('/pdf', pdf)
 
+
+//INIT SERVER
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`app listening on port ${port}`))
